@@ -1,0 +1,11 @@
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-10-13 01:32 +0530
+
+http-generator-e1
+Categories: default discovery safe
+https://nmap.org/nsedoc/scripts/http-generator-e1.html
+  Displays the contents of the "generator" meta tag of a web page (default: /)
+  if there is one.
+
+  The meta tag is found whatever the order of its attributes, the quoting of
+  its values or the case of its name. If a page has several generator meta tags,
+  all of them are shown.

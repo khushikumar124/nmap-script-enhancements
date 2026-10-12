@@ -1,0 +1,1 @@
+E1 replaces the single Lua pattern with a small attribute reader. Every <meta> tag in <head> is read attribute by attribute, so extra attributes, reversed order, any quote style and any letter case now work, and all generator tags on a page are shown. Only the first 64 KB are scanned, and the same limit is given to http.get.

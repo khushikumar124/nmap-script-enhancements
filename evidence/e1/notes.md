@@ -1,0 +1,5 @@
+# E1 notes (Nmap 7.99)
+Stock http-generator needs `name` straight before `content`, so it printed nothing for the Gatsby tag (extra attribute), the Hugo tag (reversed order), an unquoted value, and `content` before `name` ending in `/>`. It also returns only the first tag.
+Extra defect found while testing the "very large body" case: for any response body over 2 MB, `http.get` returns an error ("Received response body too large"), so the stock script prints nothing even when the generator tag is in the first bytes of the page (/e1/large).
+Enhanced version reads each `<meta>` tag's attributes separately, matches `generator` case-insensitively, lists every tag, and scans only up to `</head>` or 64 KB; the same 64 KB cap is given to http.get with `truncated_ok`. Request count is unchanged (1 GET).
+Second extra defect: for `<meta name="generator" content="">` the stock script returns an empty string and Nmap prints the error `Bug in http-generator: no string output.` on stderr (evidence/e1/empty-content.txt). The enhanced script prints nothing for it.

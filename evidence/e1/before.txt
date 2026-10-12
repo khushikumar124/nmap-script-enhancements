@@ -1,0 +1,37 @@
+$ nmap -sV -Pn -p8081 --script ./scripts/http-generator.nse --script-args http-generator.path=/ 127.0.0.1
+8081/tcp open  http    BaseHTTPServer 0.6 (Python 3.9.6)
+
+$ nmap -sV -Pn -p8082 --script ./scripts/http-generator.nse --script-args http-generator.path=/ 127.0.0.1
+8082/tcp open  http    BaseHTTPServer 0.6 (Python 3.9.6)
+
+$ nmap -sV -Pn -p8081 --script ./scripts/http-generator.nse --script-args http-generator.path=/e1/stock 127.0.0.1
+8081/tcp open  http    BaseHTTPServer 0.6 (Python 3.9.6)
+|_http-generator: TYPO3 4.2 CMS
+
+$ nmap -sV -Pn -p8081 --script ./scripts/http-generator.nse --script-args http-generator.path=/e1/single 127.0.0.1
+8081/tcp open  http    BaseHTTPServer 0.6 (Python 3.9.6)
+|_http-generator: Joomla 4.3
+
+$ nmap -sV -Pn -p8081 --script ./scripts/http-generator.nse --script-args http-generator.path=/e1/unquoted 127.0.0.1
+8081/tcp open  http    BaseHTTPServer 0.6 (Python 3.9.6)
+
+$ nmap -sV -Pn -p8081 --script ./scripts/http-generator.nse --script-args http-generator.path=/e1/upper 127.0.0.1
+8081/tcp open  http    BaseHTTPServer 0.6 (Python 3.9.6)
+|_http-generator: Hexo 6.3
+
+$ nmap -sV -Pn -p8081 --script ./scripts/http-generator.nse --script-args http-generator.path=/e1/two 127.0.0.1
+8081/tcp open  http    BaseHTTPServer 0.6 (Python 3.9.6)
+|_http-generator: WordPress 6.4
+
+$ nmap -sV -Pn -p8081 --script ./scripts/http-generator.nse --script-args http-generator.path=/e1/nongen 127.0.0.1
+8081/tcp open  http    BaseHTTPServer 0.6 (Python 3.9.6)
+
+$ nmap -sV -Pn -p8081 --script ./scripts/http-generator.nse --script-args http-generator.path=/e1/empty 127.0.0.1
+8081/tcp open  http    BaseHTTPServer 0.6 (Python 3.9.6)
+
+$ nmap -sV -Pn -p8081 --script ./scripts/http-generator.nse --script-args http-generator.path=/e1/selfclose 127.0.0.1
+8081/tcp open  http    BaseHTTPServer 0.6 (Python 3.9.6)
+
+$ nmap -sV -Pn -p8081 --script ./scripts/http-generator.nse --script-args http-generator.path=/e1/large 127.0.0.1
+8081/tcp open  http    BaseHTTPServer 0.6 (Python 3.9.6)
+
