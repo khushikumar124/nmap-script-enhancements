@@ -1,0 +1,1 @@
+Stock http-generator from Nmap, unchanged. It needs the generator meta tag to be written exactly as name=... then content=..., so it prints nothing for the Gatsby page on 8081 and the Hugo page on 8082, and it never looks at HTTP headers.
