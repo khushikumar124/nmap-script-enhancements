@@ -1,0 +1,1 @@
+Stock unusual-port from Nmap, unchanged. It prints only the sentence 'ssh unexpected on port tcp/23'. It does not say what the port normally carries or how sure Nmap is, and it treats services wrapped in TLS as unexpected.

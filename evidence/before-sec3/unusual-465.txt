@@ -1,0 +1,13 @@
+$ nmap -sV -Pn -p465 --script ./scripts/unusual-port.nse 127.0.0.1
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-10-13 01:29 +0530
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.000097s latency).
+
+PORT    STATE SERVICE  VERSION
+465/tcp open  ssl/smtp Postfix smtpd
+|_unusual-port: smtp unexpected on port tcp/465
+Service Info: Host:  mail.example.com
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 6.12 seconds
+
