@@ -1,0 +1,33 @@
+== e1 (http-generator) ==
+http-generator: find the generator meta tag in any attribute order
+
+The single Lua pattern needed name immediately followed by content, so
+tags such as <meta data-react-helmet="true" name="generator" ...> or
+<meta content="Hugo" name="generator"> printed nothing. Read the attributes
+of every <meta> tag independently, match name case-insensitively, report all
+generator tags, and scan only up to </head> or 64 KB. Also pass that limit to
+http.get: a body over 2 MB made it fail and the script printed nothing.
+
+== e2 (http-generator) ==
+http-generator: also report the X-Generator header
+
+Some servers announce the software only in the X-Generator response header,
+which the script already receives. Add it to the findings, record the source
+(meta or header) of each one, and return a structured table. The text for
+meta-only pages is unchanged.
+
+== e3 (unusual-port) ==
+unusual-port: show the expected service and detection details
+
+Keep the "X unexpected on port" sentence and add the service nmap-services
+lists for the port, the detection method and the confidence, with a
+structured table for XML output.
+
+== e4 (unusual-port) ==
+unusual-port: do not flag services found inside TLS
+
+ssl/smtp on 465, ssl/imap on 993, ssl/pop3 on 995, ssl/ldap on 636,
+ssl/ftp on 990 and ssl/nntp on 563 were reported as unexpected because the
+script compared the plain name with the nmap-services name (imaps, snews,
+...). When service_tunnel is "ssl", accept the name plus "s", or a port in
+the small tlschecks table. Other services inside TLS are still reported.
