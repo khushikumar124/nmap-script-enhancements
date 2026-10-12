@@ -1,0 +1,90 @@
+# Stock unusual-port on TLS-wrapped services (Nmap 7.99). Servers: bench/srv.py (main mode).
+
+$ nmap -sV -Pn -p465 --script ./scripts/unusual-port.nse 127.0.0.1
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-10-13 01:35 +0530
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.000084s latency).
+
+PORT    STATE SERVICE  VERSION
+465/tcp open  ssl/smtp Postfix smtpd
+|_unusual-port: smtp unexpected on port tcp/465
+Service Info: Host:  mail.example.com
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 6.10 seconds
+
+$ nmap -sV -Pn -p993 --script ./scripts/unusual-port.nse 127.0.0.1
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-10-13 01:35 +0530
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.000063s latency).
+
+PORT    STATE SERVICE  VERSION
+993/tcp open  ssl/imap Dovecot imapd
+|_unusual-port: imap unexpected on port tcp/993
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 6.13 seconds
+
+$ nmap -sV -Pn -p995 --script ./scripts/unusual-port.nse 127.0.0.1
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-10-13 01:35 +0530
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.00012s latency).
+
+PORT    STATE SERVICE  VERSION
+995/tcp open  ssl/pop3 Dovecot pop3d
+|_unusual-port: pop3 unexpected on port tcp/995
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 6.11 seconds
+
+$ nmap -sV -Pn -p636 --script ./scripts/unusual-port.nse 127.0.0.1
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-10-13 01:35 +0530
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.000067s latency).
+
+PORT    STATE SERVICE  VERSION
+636/tcp open  ssl/ldap (Anonymous bind OK)
+|_unusual-port: ldap unexpected on port tcp/636
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 10.12 seconds
+
+$ nmap -sV -Pn -p990 --script ./scripts/unusual-port.nse 127.0.0.1
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-10-13 01:35 +0530
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.000083s latency).
+
+PORT    STATE SERVICE VERSION
+990/tcp open  ssl/ftp
+|_unusual-port: ftp unexpected on port tcp/990
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 16.17 seconds
+
+$ nmap -sV -Pn -p563 --script ./scripts/unusual-port.nse 127.0.0.1
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-10-13 01:35 +0530
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.00010s latency).
+
+PORT    STATE SERVICE  VERSION
+563/tcp open  ssl/nntp
+|_unusual-port: nntp unexpected on port tcp/563
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 12.15 seconds
+
+nmap-services entries for these ports (tcp), from /opt/homebrew/opt/nmap/share/nmap/nmap-services:
+  22/tcp -> ssh
+  23/tcp -> telnet
+  465/tcp -> smtps
+  563/tcp -> snews
+  636/tcp -> ldapssl
+  990/tcp -> ftps
+  993/tcp -> imaps
+  995/tcp -> pop3s
+<service name="smtp"  ... tunnel="ssl"
+<service name="nntp" tunnel="ssl"
+<service name="ldap" extrainfo="Anonymous bind OK" tunnel="ssl"
+<service name="ftp" tunnel="ssl"
+<service name="imap"  ... tunnel="ssl"
+<service name="pop3"  ... tunnel="ssl"

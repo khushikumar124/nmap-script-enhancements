@@ -1,0 +1,25 @@
+Unchanged cases: stock vs enhanced on ports where the stock script is silent or its sentence must stay the same.
+
+port 22
+  stock   : (nothing)
+  enhanced: (nothing)
+  first line: MATCH
+
+port 23
+  stock   : |_unusual-port: ssh unexpected on port tcp/23
+  enhanced: | unusual-port-e4: ssh unexpected on port tcp/23
+            |_expected telnet; detection probed, confidence 10
+  first line: MATCH
+
+port 2222
+  stock   : |_unusual-port: ssh unexpected on port tcp/2222
+  enhanced: | unusual-port-e4: ssh unexpected on port tcp/2222
+            |_expected EtherNetIP-1; detection probed, confidence 10
+  first line: MATCH
+
+port 5433
+  stock   : |_unusual-port: http unexpected on port tcp/5433
+  enhanced: | unusual-port-e4: http unexpected on port tcp/5433
+            |_expected pyrrho; detection probed, confidence 10
+  first line: MATCH
+

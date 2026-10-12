@@ -1,0 +1,49 @@
+--- ./scripts/unusual-port-e3.nse	2026-10-13 01:28:56
++++ ./scripts/unusual-port-e4.nse	2026-10-13 01:28:56
+@@ -12,11 +12,11 @@
+ 
+ ---
+ -- @usage
+--- nmap --script unusual-port-e3 <ip>
++-- nmap --script unusual-port-e4 <ip>
+ --
+ -- @output
+ -- 23/tcp open   ssh     OpenSSH 5.8p1 Debian 7ubuntu1 (protocol 2.0)
+--- | unusual-port-e3: ssh unexpected on port tcp/23
++-- | unusual-port-e4: ssh unexpected on port tcp/23
+ -- |_expected telnet; detection probed, confidence 10
+ -- 25/tcp open   smtp    Postfix smtpd
+ --
+@@ -89,6 +89,20 @@
+ 
+ }
+ 
++-- For services found inside TLS (service_tunnel == "ssl"). A port whose
++-- nmap-services name is the detected service plus "s" (imaps for imap, pop3s
++-- for pop3, ftps for ftp) needs no entry. These ports are listed because their
++-- name does not follow that rule in every nmap-services version.
++tlschecks = {
++
++  ['tcp'] = {
++    [465] = "smtp",
++    [563] = "nntp",
++    [636] = "ldap",
++  }
++
++}
++
+ servicechecks = {
+   ['http'] = function(host, port)
+     local service = port.service
+@@ -119,6 +133,11 @@
+   if ( not(ok) and servicechecks[port.service] ) then
+     ok = servicechecks[port.service](host, port)
+   end
++  if ( not(ok) and port.version.service_tunnel == "ssl" and port.service ) then
++    local expected = svc_table[port.protocol][port.number]
++    ok = ( expected == port.service .. "s" or
++      ( tlschecks[port.protocol] and tlschecks[port.protocol][port.number] == port.service ) )
++  end
+   if ( not(ok) and port.service and
+       ( port.service == svc_table[port.protocol][port.number] or
+       "unknown" == svc_table[port.protocol][port.number] or

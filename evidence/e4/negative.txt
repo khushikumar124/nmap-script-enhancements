@@ -1,0 +1,25 @@
+Cases that must STILL be flagged by the enhanced script (stock shown for comparison).
+## srv.py mode ssh993
+$ nmap -sV -Pn -p993 --script ./scripts/unusual-port.nse 127.0.0.1
+PORT    STATE SERVICE VERSION
+993/tcp open  ssl/ssh OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0)
+|_unusual-port: ssh unexpected on port tcp/993
+
+$ nmap -sV -Pn -p993 --script ./scripts/unusual-port-e4.nse 127.0.0.1
+PORT    STATE SERVICE VERSION
+993/tcp open  ssl/ssh OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0)
+| unusual-port-e4: ssh unexpected on port tcp/993
+|_expected imaps; detection probed, confidence 10
+
+## srv.py mode smtp993
+$ nmap -sV -Pn -p993 --script ./scripts/unusual-port.nse 127.0.0.1
+PORT    STATE SERVICE VERSION
+993/tcp open  smtp    Postfix smtpd
+|_unusual-port: smtp unexpected on port tcp/993
+
+$ nmap -sV -Pn -p993 --script ./scripts/unusual-port-e4.nse 127.0.0.1
+PORT    STATE SERVICE VERSION
+993/tcp open  smtp    Postfix smtpd
+| unusual-port-e4: smtp unexpected on port tcp/993
+|_expected imaps; detection probed, confidence 10
+

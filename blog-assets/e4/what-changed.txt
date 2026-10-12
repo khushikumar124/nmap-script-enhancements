@@ -1,0 +1,1 @@
+E4 stops flagging services that Nmap found inside TLS. When service_tunnel is ssl, the detected name is accepted if the nmap-services name is that name plus s (imaps, pop3s, ftps) or if the port is in a small tlschecks table (465, 563, 636). ssh inside TLS on 993 and plaintext smtp on 993 are still flagged.

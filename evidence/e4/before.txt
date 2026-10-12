@@ -1,0 +1,30 @@
+$ nmap -sV -Pn -p465 --script ./scripts/unusual-port.nse 127.0.0.1
+PORT    STATE SERVICE  VERSION
+465/tcp open  ssl/smtp Postfix smtpd
+|_unusual-port: smtp unexpected on port tcp/465
+
+$ nmap -sV -Pn -p993 --script ./scripts/unusual-port.nse 127.0.0.1
+PORT    STATE SERVICE  VERSION
+993/tcp open  ssl/imap Dovecot imapd
+|_unusual-port: imap unexpected on port tcp/993
+
+$ nmap -sV -Pn -p995 --script ./scripts/unusual-port.nse 127.0.0.1
+PORT    STATE SERVICE  VERSION
+995/tcp open  ssl/pop3 Dovecot pop3d
+|_unusual-port: pop3 unexpected on port tcp/995
+
+$ nmap -sV -Pn -p636 --script ./scripts/unusual-port.nse 127.0.0.1
+PORT    STATE SERVICE  VERSION
+636/tcp open  ssl/ldap (Anonymous bind OK)
+|_unusual-port: ldap unexpected on port tcp/636
+
+$ nmap -sV -Pn -p990 --script ./scripts/unusual-port.nse 127.0.0.1
+PORT    STATE SERVICE VERSION
+990/tcp open  ssl/ftp
+|_unusual-port: ftp unexpected on port tcp/990
+
+$ nmap -sV -Pn -p563 --script ./scripts/unusual-port.nse 127.0.0.1
+PORT    STATE SERVICE  VERSION
+563/tcp open  ssl/nntp
+|_unusual-port: nntp unexpected on port tcp/563
+

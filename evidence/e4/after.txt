@@ -1,0 +1,24 @@
+$ nmap -sV -Pn -p465 --script ./scripts/unusual-port-e4.nse 127.0.0.1
+PORT    STATE SERVICE  VERSION
+465/tcp open  ssl/smtp Postfix smtpd
+
+$ nmap -sV -Pn -p993 --script ./scripts/unusual-port-e4.nse 127.0.0.1
+PORT    STATE SERVICE  VERSION
+993/tcp open  ssl/imap Dovecot imapd
+
+$ nmap -sV -Pn -p995 --script ./scripts/unusual-port-e4.nse 127.0.0.1
+PORT    STATE SERVICE  VERSION
+995/tcp open  ssl/pop3 Dovecot pop3d
+
+$ nmap -sV -Pn -p636 --script ./scripts/unusual-port-e4.nse 127.0.0.1
+PORT    STATE SERVICE  VERSION
+636/tcp open  ssl/ldap (Anonymous bind OK)
+
+$ nmap -sV -Pn -p990 --script ./scripts/unusual-port-e4.nse 127.0.0.1
+PORT    STATE SERVICE VERSION
+990/tcp open  ssl/ftp
+
+$ nmap -sV -Pn -p563 --script ./scripts/unusual-port-e4.nse 127.0.0.1
+PORT    STATE SERVICE  VERSION
+563/tcp open  ssl/nntp
+
