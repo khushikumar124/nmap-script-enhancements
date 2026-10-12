@@ -1,0 +1,1 @@
+E3 keeps the stock sentence as the first line and adds a second line with the service nmap-services lists for the port, how the service was detected (probed or table) and the confidence. A structured table with port, protocol, detected, expected, confidence and method is returned for XML output. No new connections are made.

@@ -1,0 +1,18 @@
+$ nmap -sV -Pn -p22,23,5433 --script ./scripts/unusual-port-e3.nse 127.0.0.1
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-10-13 01:39 +0530
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.00014s latency).
+
+PORT     STATE SERVICE VERSION
+22/tcp   open  ssh     OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0)
+23/tcp   open  ssh     OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0)
+| unusual-port-e3: ssh unexpected on port tcp/23
+|_expected telnet; detection probed, confidence 10
+5433/tcp open  http    BaseHTTPServer 0.6 (Python 3.9.6)
+|_http-server-header: BaseHTTP/0.6 Python/3.9.6
+| unusual-port-e3: http unexpected on port tcp/5433
+|_expected pyrrho; detection probed, confidence 10
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 6.10 seconds

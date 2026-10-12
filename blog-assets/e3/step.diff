@@ -1,0 +1,61 @@
+--- ./scripts/unusual-port.nse	2026-10-13 01:28:56
++++ ./scripts/unusual-port-e3.nse	2026-10-13 01:28:56
+@@ -12,13 +12,22 @@
+ 
+ ---
+ -- @usage
+--- nmap --script unusual-port <ip>
++-- nmap --script unusual-port-e3 <ip>
+ --
+ -- @output
+ -- 23/tcp open   ssh     OpenSSH 5.8p1 Debian 7ubuntu1 (protocol 2.0)
+--- |_unusual-port: ssh unexpected on port tcp/23
++-- | unusual-port-e3: ssh unexpected on port tcp/23
++-- |_expected telnet; detection probed, confidence 10
+ -- 25/tcp open   smtp    Postfix smtpd
+ --
++-- @xmloutput
++-- <elem key="port">23</elem>
++-- <elem key="protocol">tcp</elem>
++-- <elem key="detected">ssh</elem>
++-- <elem key="expected">telnet</elem>
++-- <elem key="confidence">10</elem>
++-- <elem key="method">probed</elem>
++--
+ 
+ author = "Patrik Karlsson"
+ license = "Same as Nmap--See https://nmap.org/book/man-legal.html"
+@@ -117,7 +126,32 @@
+     ok = true
+   end
+   if ( not(ok) ) then
+-    return ("%s unexpected on port %s/%d"):format(port.service, port.protocol, port.number)
++    local sentence = ("%s unexpected on port %s/%d"):format(port.service, port.protocol, port.number)
++
++    local out = stdnse.output_table()
++    out.port = port.number
++    out.protocol = port.protocol
++    out.detected = port.service
++    -- a port with its own entry in portchecks is judged by that check, not by
++    -- the nmap-services name, so no expected service is shown for it
++    if not portchecks[port.protocol][port.number] then
++      out.expected = svc_table[port.protocol][port.number]
++    end
++    out.confidence = math.floor(port.version.name_confidence)
++    out.method = port.version.service_dtype
++
++    -- the first line is the stock sentence; the detail follows on a second line
++    local detail = {}
++    if out.expected then
++      detail[#detail + 1] = "expected " .. out.expected
++    end
++    if out.method then
++      detail[#detail + 1] = ("detection %s, confidence %d"):format(out.method, out.confidence)
++    end
++    if #detail > 0 then
++      sentence = sentence .. "\n" .. table.concat(detail, "; ")
++    end
++    return out, sentence
+   end
+ end
+ 

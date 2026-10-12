@@ -1,0 +1,19 @@
+$ nmap -sV -Pn -p23 --script ./scripts/unusual-port.nse 127.0.0.1
+PORT   STATE SERVICE VERSION
+23/tcp open  ssh     OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0)
+|_unusual-port: ssh unexpected on port tcp/23
+
+$ nmap -sV -Pn -p5433 --script ./scripts/unusual-port.nse 127.0.0.1
+PORT     STATE SERVICE VERSION
+5433/tcp open  http    BaseHTTPServer 0.6 (Python 3.9.6)
+|_unusual-port: http unexpected on port tcp/5433
+
+$ nmap -sV -Pn -p2222 --script ./scripts/unusual-port.nse 127.0.0.1
+PORT     STATE SERVICE VERSION
+2222/tcp open  ssh     OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0)
+|_unusual-port: ssh unexpected on port tcp/2222
+
+$ nmap -sV -Pn -p22 --script ./scripts/unusual-port.nse 127.0.0.1
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0)
+

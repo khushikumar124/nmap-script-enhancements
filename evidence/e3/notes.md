@@ -1,0 +1,3 @@
+# E3 notes (Nmap 7.99)
+Stock unusual-port prints only `ssh unexpected on port tcp/23`. It does not say which service the port normally carries, nor whether Nmap probed the service or only guessed it from the port table.
+Enhanced version keeps that sentence as the first line and adds a second line with the nmap-services name, the detection method (`service_dtype`) and the confidence, plus a structured table (port, protocol, detected, expected, confidence, method) for -oX. The expected name is left out for ports that have their own check in `portchecks`. No new connections: the server saw 2 connections with the stock script, with the enhanced one and with no script at all (-sV only).

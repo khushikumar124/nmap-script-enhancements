@@ -1,0 +1,22 @@
+$ nmap -sV -Pn -p23 --script ./scripts/unusual-port-e3.nse 127.0.0.1
+PORT   STATE SERVICE VERSION
+23/tcp open  ssh     OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0)
+| unusual-port-e3: ssh unexpected on port tcp/23
+|_expected telnet; detection probed, confidence 10
+
+$ nmap -sV -Pn -p5433 --script ./scripts/unusual-port-e3.nse 127.0.0.1
+PORT     STATE SERVICE VERSION
+5433/tcp open  http    BaseHTTPServer 0.6 (Python 3.9.6)
+| unusual-port-e3: http unexpected on port tcp/5433
+|_expected pyrrho; detection probed, confidence 10
+
+$ nmap -sV -Pn -p2222 --script ./scripts/unusual-port-e3.nse 127.0.0.1
+PORT     STATE SERVICE VERSION
+2222/tcp open  ssh     OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0)
+| unusual-port-e3: ssh unexpected on port tcp/2222
+|_expected EtherNetIP-1; detection probed, confidence 10
+
+$ nmap -sV -Pn -p22 --script ./scripts/unusual-port-e3.nse 127.0.0.1
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0)
+

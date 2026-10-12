@@ -1,0 +1,3 @@
+port 23 script=./scripts/unusual-port.nse  connections/requests seen by the server: 2
+port 23 script=./scripts/unusual-port-e3.nse  connections/requests seen by the server: 2
+port 23 script=none  connections/requests seen by the server: 2
