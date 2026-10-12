@@ -1,0 +1,3 @@
+# E2 notes (Nmap 7.99)
+Stock http-generator never looks at the response headers. A server that announces itself only with `X-Generator: Drupal 10 (...)` (path /e2/header) gives no output at all, although the header is already in the one response the script fetches.
+Enhanced version adds the header to the findings, lists a value once if the tag and the header agree, records the source (`meta`, `header` or `meta, header`) in the structured table, and keeps meta-only output identical to stock. X-Powered-By is not added because http-php-version, http-devframework and http-server-header cover it. Request count is the same as stock (1 GET).

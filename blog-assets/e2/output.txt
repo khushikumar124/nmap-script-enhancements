@@ -1,0 +1,16 @@
+$ nmap -sV -Pn -p8081,8082 --script ./scripts/http-generator-e2.nse 127.0.0.1
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-10-13 01:39 +0530
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.000083s latency).
+
+PORT     STATE SERVICE VERSION
+8081/tcp open  http    BaseHTTPServer 0.6 (Python 3.9.6)
+| http-generator-e2: Gatsby 5.13
+|_Drupal 10 (https://www.drupal.org) (X-Generator header)
+|_http-server-header: BaseHTTP/0.6 Python/3.9.6
+8082/tcp open  http    BaseHTTPServer 0.6 (Python 3.9.6)
+|_http-generator-e2: Hugo 0.120
+|_http-server-header: BaseHTTP/0.6 Python/3.9.6
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 6.12 seconds

@@ -1,0 +1,20 @@
+$ nmap -sV -Pn -p8081 --script ./scripts/http-generator-e2.nse --script-args http-generator.path=/e2/header -oX - 127.0.0.1
+(xmllint --noout: well-formed; XML saved to a file for the check, same output as -oX -)
+<script id="http-generator-e2" output="Drupal 10 (https://www.drupal.org) (X-Generator header)"><table>
+<elem key="generator">Drupal 10 (https://www.drupal.org)</elem>
+<elem key="source">header</elem>
+</table>
+</script>
+
+$ nmap -sV -Pn -p8081 --script ./scripts/http-generator-e2.nse --script-args http-generator.path=/e2/diff -oX - 127.0.0.1
+(xmllint --noout: well-formed; XML saved to a file for the check, same output as -oX -)
+<script id="http-generator-e2" output="Hugo 0.120&#xa;Drupal 10 (https://www.drupal.org) (X-Generator header)"><table>
+<elem key="generator">Hugo 0.120</elem>
+<elem key="source">meta</elem>
+</table>
+<table>
+<elem key="generator">Drupal 10 (https://www.drupal.org)</elem>
+<elem key="source">header</elem>
+</table>
+</script>
+

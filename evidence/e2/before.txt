@@ -1,0 +1,28 @@
+$ nmap -sV -Pn -p8081 --script ./scripts/http-generator.nse --script-args http-generator.path=/e2/header 127.0.0.1
+8081/tcp open  http    BaseHTTPServer 0.6 (Python 3.9.6)
+
+$ nmap -sV -Pn -p8081 --script ./scripts/http-generator.nse --script-args http-generator.path=/e2/meta 127.0.0.1
+8081/tcp open  http    BaseHTTPServer 0.6 (Python 3.9.6)
+|_http-generator: Hugo 0.120
+
+$ nmap -sV -Pn -p8081 --script ./scripts/http-generator.nse --script-args http-generator.path=/e2/same 127.0.0.1
+8081/tcp open  http    BaseHTTPServer 0.6 (Python 3.9.6)
+|_http-generator: Drupal 10 (https://www.drupal.org)
+
+$ nmap -sV -Pn -p8081 --script ./scripts/http-generator.nse --script-args http-generator.path=/e2/diff 127.0.0.1
+8081/tcp open  http    BaseHTTPServer 0.6 (Python 3.9.6)
+|_http-generator: Hugo 0.120
+
+$ nmap -sV -Pn -p8081 --script ./scripts/http-generator.nse --script-args http-generator.path=/e2/none 127.0.0.1
+8081/tcp open  http    BaseHTTPServer 0.6 (Python 3.9.6)
+
+$ nmap -sV -Pn -p8081 --script ./scripts/http-generator.nse --script-args http-generator.path=/e1/stock 127.0.0.1
+8081/tcp open  http    BaseHTTPServer 0.6 (Python 3.9.6)
+|_http-generator: TYPO3 4.2 CMS
+
+$ nmap -sV -Pn -p8081 --script ./scripts/http-generator.nse --script-args http-generator.path=/ 127.0.0.1
+8081/tcp open  http    BaseHTTPServer 0.6 (Python 3.9.6)
+
+$ nmap -sV -Pn -p8082 --script ./scripts/http-generator.nse --script-args http-generator.path=/ 127.0.0.1
+8082/tcp open  http    BaseHTTPServer 0.6 (Python 3.9.6)
+

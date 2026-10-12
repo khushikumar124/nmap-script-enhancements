@@ -1,0 +1,1 @@
+E2 also reads the X-Generator response header from the same single response. Each finding keeps its source (meta or header) in a structured table for XML output, a value found in both places is listed once, and a page with only a meta tag prints exactly what the stock script printed.

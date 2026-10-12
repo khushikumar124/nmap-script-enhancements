@@ -1,0 +1,3 @@
+script=./scripts/http-generator.nse  GET /e1/stock requests seen by server: 1   all requests: 8
+script=./scripts/http-generator-e2.nse  GET /e1/stock requests seen by server: 1   all requests: 8
+script=none  GET /e1/stock requests seen by server: 0   all requests: 7

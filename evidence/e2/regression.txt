@@ -1,0 +1,29 @@
+Cases where the stock script already printed something, or must stay silent.
+A case is OK when the enhanced output is identical to stock, or (multi-tag/multi-source pages only) starts with the same text.
+
+port 8081 path /e2/meta
+  stock   : ['|_http-generator: Hugo 0.120']
+  enhanced: ['|_http-generator: Hugo 0.120']
+  identical: YES
+
+port 8081 path /e2/same
+  stock   : ['|_http-generator: Drupal 10 (https://www.drupal.org)']
+  enhanced: ['|_http-generator: Drupal 10 (https://www.drupal.org)']
+  identical: YES
+
+port 8081 path /e2/diff
+  stock   : ['|_http-generator: Hugo 0.120']
+  enhanced: ['| http-generator: Hugo 0.120', '|_Drupal 10 (https://www.drupal.org) (X-Generator header)']
+  identical: NO (see note)
+
+port 8081 path /e2/none
+  stock   : (nothing)
+  enhanced: (nothing)
+  identical: YES
+
+port 8081 path /e1/stock
+  stock   : ['|_http-generator: TYPO3 4.2 CMS']
+  enhanced: ['|_http-generator: TYPO3 4.2 CMS']
+  identical: YES
+
+Note: the enhanced script prints its own name (http-generator-e1: ...); the label is normalised to http-generator: above. A row marked NO differs on purpose: the page has several generator sources, so the enhanced script adds lines after the stock line.
