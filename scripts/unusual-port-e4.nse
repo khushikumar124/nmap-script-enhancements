@@ -8,6 +8,14 @@ Compares the detected service on a port against the expected service for that
 port number (e.g. ssh on 22, http on 80) and reports deviations. The script
 requires that a version scan has been run in order to be able to discover what
 service is actually running on each port.
+
+For each deviation the output also shows the service that nmap-services lists
+for the port (left out for ports that have their own check), whether the
+service name was probed or only taken from the table, and the confidence of
+the version detection. A structured table is returned for XML output.
+A service that Nmap found inside TLS (for example ssl/imap on port 993) is not
+reported when the port is listed for its secure name (imaps) or in the small
+tlschecks table. Other services found inside TLS are still reported.
 ]]
 
 ---

@@ -1,6 +1,6 @@
---- a/http-generator.nse	2026-10-13 01:15:59
-+++ b/http-generator.nse	2026-10-13 01:15:59
-@@ -4,11 +4,15 @@
+--- a/http-generator.nse	2026-10-13 06:48:58
++++ b/http-generator.nse	2026-10-13 06:48:58
+@@ -4,12 +4,16 @@
  
  description = [[
  Displays the contents of the "generator" meta tag of a web page (default: /)
@@ -9,7 +9,8 @@
  
  The meta tag is found whatever the order of its attributes, the quoting of
  its values or the case of its name. If a page has several generator meta tags,
- all of them are shown.
+ all of them are shown. Only the start of the page is searched (up to the end of
+ <head> or the first 64 KB).
 +
 +Both sources come from the single response the script already requests. Each
 +finding in the structured output records whether it came from a "meta" tag or
@@ -17,7 +18,7 @@
  ]]
  
  author = "Michael Kohl"
-@@ -32,6 +36,22 @@
+@@ -33,6 +37,22 @@
  -- | http-generator: WordPress 6.4
  -- |_Elementor 3.18
  --
@@ -40,7 +41,7 @@
  -- @args http-generator.path Specify the path you want to check for a generator meta tag (default to '/').
  -- @args http-generator.redirects Specify the maximum number of redirects to follow (defaults to 3).
  
-@@ -57,6 +77,8 @@
+@@ -58,6 +78,8 @@
  -- 2026-10-13 Khushi Kumar <khushikumar6819@gmail.com>:
  --   + read the attributes of every <meta> tag instead of one fixed pattern
  --   + report every generator tag found, not only the first
@@ -49,7 +50,7 @@
  
  portrule = shortport.http
  
-@@ -125,11 +147,56 @@
+@@ -126,11 +148,56 @@
    local redirects = tonumber(stdnse.get_script_args('http-generator.redirects')) or 3
  
    local response = http.get(host, port, path, {redirect_ok=redirects, max_body_size=MAX_SCAN, truncated_ok=true})

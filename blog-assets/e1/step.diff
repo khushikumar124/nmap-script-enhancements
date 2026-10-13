@@ -1,6 +1,6 @@
 --- ./scripts/http-generator.nse	2026-10-13 01:28:56
-+++ ./scripts/http-generator-e1.nse	2026-10-13 01:28:56
-@@ -1,11 +1,14 @@
++++ ./scripts/http-generator-e1.nse	2026-10-13 06:48:58
+@@ -1,11 +1,15 @@
  local http = require "http"
  local shortport = require "shortport"
  local stdnse = require "stdnse"
@@ -12,11 +12,12 @@
 +
 +The meta tag is found whatever the order of its attributes, the quoting of
 +its values or the case of its name. If a page has several generator meta tags,
-+all of them are shown.
++all of them are shown. Only the start of the page is searched (up to the end of
++<head> or the first 64 KB).
  ]]
  
  author = "Michael Kohl"
-@@ -14,15 +17,21 @@
+@@ -14,15 +18,21 @@
  
  ---
  -- @usage
@@ -41,7 +42,7 @@
  -- @args http-generator.path Specify the path you want to check for a generator meta tag (default to '/').
  -- @args http-generator.redirects Specify the maximum number of redirects to follow (defaults to 3).
  
-@@ -45,18 +54,82 @@
+@@ -45,18 +55,82 @@
  --   + add changelog
  -- 2014-07-29 Fabian Affolter <fabian@affolter-engineering.ch>:
  --   + update generator pattern

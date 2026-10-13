@@ -8,7 +8,8 @@ if there is one. The X-Generator HTTP response header is shown too.
 
 The meta tag is found whatever the order of its attributes, the quoting of
 its values or the case of its name. If a page has several generator meta tags,
-all of them are shown.
+all of them are shown. Only the start of the page is searched (up to the end of
+<head> or the first 64 KB).
 
 Both sources come from the single response the script already requests. Each
 finding in the structured output records whether it came from a "meta" tag or

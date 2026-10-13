@@ -1,6 +1,13 @@
---- ./scripts/unusual-port-e3.nse	2026-10-13 01:28:56
-+++ ./scripts/unusual-port-e4.nse	2026-10-13 01:28:56
-@@ -12,11 +12,11 @@
+--- ./scripts/unusual-port-e3.nse	2026-10-13 06:48:58
++++ ./scripts/unusual-port-e4.nse	2026-10-13 06:48:58
+@@ -13,15 +13,18 @@
+ for the port (left out for ports that have their own check), whether the
+ service name was probed or only taken from the table, and the confidence of
+ the version detection. A structured table is returned for XML output.
++A service that Nmap found inside TLS (for example ssl/imap on port 993) is not
++reported when the port is listed for its secure name (imaps) or in the small
++tlschecks table. Other services found inside TLS are still reported.
+ ]]
  
  ---
  -- @usage
@@ -14,7 +21,7 @@
  -- |_expected telnet; detection probed, confidence 10
  -- 25/tcp open   smtp    Postfix smtpd
  --
-@@ -89,6 +89,20 @@
+@@ -94,6 +97,20 @@
  
  }
  
@@ -35,7 +42,7 @@
  servicechecks = {
    ['http'] = function(host, port)
      local service = port.service
-@@ -119,6 +133,11 @@
+@@ -124,6 +141,11 @@
    if ( not(ok) and servicechecks[port.service] ) then
      ok = servicechecks[port.service](host, port)
    end
