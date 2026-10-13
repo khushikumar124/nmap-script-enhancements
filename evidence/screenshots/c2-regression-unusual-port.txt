@@ -1,0 +1,33 @@
+$ nmap -sV -Pn -p22 --script ./scripts/unusual-port.nse 127.0.0.1
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-10-13 06:49 +0530
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.00015s latency).
+
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 0.19 seconds
+$ nmap -sV -Pn -p22 --script ./scripts/unusual-port-e3.nse 127.0.0.1
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-10-13 06:49 +0530
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.00013s latency).
+
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 0.17 seconds
+$ nmap -sV -Pn -p22 --script ./scripts/unusual-port-e4.nse 127.0.0.1
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-10-13 06:49 +0530
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.00018s latency).
+
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 0.17 seconds

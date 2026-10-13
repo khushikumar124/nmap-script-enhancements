@@ -1,0 +1,44 @@
+$ nmap -sV -Pn -p465,563,636,990,993,995 --script ./scripts/unusual-port-e3.nse 127.0.0.1
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-10-13 06:51 +0530
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.00021s latency).
+
+PORT    STATE SERVICE  VERSION
+465/tcp open  ssl/smtp Postfix smtpd
+| unusual-port-e3: smtp unexpected on port tcp/465
+|_expected smtps; detection probed, confidence 10
+563/tcp open  ssl/nntp
+| unusual-port-e3: nntp unexpected on port tcp/563
+|_expected snews; detection probed, confidence 10
+636/tcp open  ssl/ldap (Anonymous bind OK)
+| unusual-port-e3: ldap unexpected on port tcp/636
+|_detection probed, confidence 10
+990/tcp open  ssl/ftp
+| unusual-port-e3: ftp unexpected on port tcp/990
+|_expected ftps; detection probed, confidence 10
+993/tcp open  ssl/imap Dovecot imapd
+| unusual-port-e3: imap unexpected on port tcp/993
+|_expected imaps; detection probed, confidence 10
+995/tcp open  ssl/pop3 Dovecot pop3d
+| unusual-port-e3: pop3 unexpected on port tcp/995
+|_expected pop3s; detection probed, confidence 10
+Service Info: Host:  mail.example.com
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 16.29 seconds
+$ nmap -sV -Pn -p465,563,636,990,993,995 --script ./scripts/unusual-port-e4.nse 127.0.0.1
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-10-13 06:51 +0530
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.00024s latency).
+
+PORT    STATE SERVICE  VERSION
+465/tcp open  ssl/smtp Postfix smtpd
+563/tcp open  ssl/nntp
+636/tcp open  ssl/ldap (Anonymous bind OK)
+990/tcp open  ssl/ftp
+993/tcp open  ssl/imap Dovecot imapd
+995/tcp open  ssl/pop3 Dovecot pop3d
+Service Info: Host:  mail.example.com
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 16.27 seconds

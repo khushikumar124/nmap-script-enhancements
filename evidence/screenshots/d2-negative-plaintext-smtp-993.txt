@@ -1,0 +1,13 @@
+$ nmap -sV -Pn -p993 --script ./scripts/unusual-port-e4.nse 127.0.0.1
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-10-13 06:50 +0530
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.00013s latency).
+
+PORT    STATE SERVICE VERSION
+993/tcp open  smtp    Postfix smtpd
+| unusual-port-e4: smtp unexpected on port tcp/993
+|_expected imaps; detection probed, confidence 10
+Service Info: Host:  mail.example.com
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 0.17 seconds

@@ -1,0 +1,30 @@
+$ nmap -sV -Pn -p8081 --script ./scripts/http-generator-e2.nse --script-args http-generator.path=/e2/diff -oX - 127.0.0.1
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///opt/homebrew/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.99 scan initiated Tue Oct 13 06:49:24 2026 as: nmap -sV -Pn -p8081 -&#45;script ./scripts/http-generator-e2.nse -&#45;script-args http-generator.path=/e2/diff -oX - 127.0.0.1 -->
+<nmaprun scanner="nmap" args="nmap -sV -Pn -p8081 -&#45;script ./scripts/http-generator-e2.nse -&#45;script-args http-generator.path=/e2/diff -oX - 127.0.0.1" start="1791854364" startstr="Tue Oct 13 06:49:24 2026" version="7.99" xmloutputversion="1.05">
+<scaninfo type="connect" protocol="tcp" numservices="1" services="8081"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<host starttime="1791854365" endtime="1791854371"><status state="up" reason="user-set" reason_ttl="0"/>
+<address addr="127.0.0.1" addrtype="ipv4"/>
+<hostnames>
+<hostname name="localhost" type="PTR"/>
+</hostnames>
+<ports><port protocol="tcp" portid="8081"><state state="open" reason="syn-ack" reason_ttl="0"/><service name="http" product="BaseHTTPServer" version="0.6" extrainfo="Python 3.9.6" method="probed" conf="10"><cpe>cpe:/a:python:python:3.9.6</cpe></service><script id="http-server-header" output="BaseHTTP/0.6 Python/3.9.6"><elem>BaseHTTP/0.6 Python/3.9.6</elem>
+</script><script id="http-generator-e2" output="Hugo 0.120&#xa;Drupal 10 (https://www.drupal.org) (X-Generator header)"><table>
+<elem key="generator">Hugo 0.120</elem>
+<elem key="source">meta</elem>
+</table>
+<table>
+<elem key="generator">Drupal 10 (https://www.drupal.org)</elem>
+<elem key="source">header</elem>
+</table>
+</script></port>
+</ports>
+<times srtt="91" rttvar="5000" to="100000"/>
+</host>
+<runstats><finished time="1791854371" timestr="Tue Oct 13 06:49:31 2026" summary="Nmap done at Tue Oct 13 06:49:31 2026; 1 IP address (1 host up) scanned in 6.23 seconds" elapsed="6.23" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

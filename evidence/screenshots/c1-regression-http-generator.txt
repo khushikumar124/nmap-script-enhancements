@@ -1,0 +1,36 @@
+$ nmap -sV -Pn -p8081 --script ./scripts/http-generator.nse --script-args http-generator.path=/e1/stock 127.0.0.1
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-10-13 06:49 +0530
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.00013s latency).
+
+PORT     STATE SERVICE VERSION
+8081/tcp open  http    BaseHTTPServer 0.6 (Python 3.9.6)
+|_http-generator: TYPO3 4.2 CMS
+|_http-server-header: BaseHTTP/0.6 Python/3.9.6
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 6.20 seconds
+$ nmap -sV -Pn -p8081 --script ./scripts/http-generator-e1.nse --script-args http-generator.path=/e1/stock 127.0.0.1
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-10-13 06:49 +0530
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.00011s latency).
+
+PORT     STATE SERVICE VERSION
+8081/tcp open  http    BaseHTTPServer 0.6 (Python 3.9.6)
+|_http-generator-e1: TYPO3 4.2 CMS
+|_http-server-header: BaseHTTP/0.6 Python/3.9.6
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 6.21 seconds
+$ nmap -sV -Pn -p8081 --script ./scripts/http-generator-e2.nse --script-args http-generator.path=/e1/stock 127.0.0.1
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-10-13 06:49 +0530
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.00012s latency).
+
+PORT     STATE SERVICE VERSION
+8081/tcp open  http    BaseHTTPServer 0.6 (Python 3.9.6)
+|_http-generator-e2: TYPO3 4.2 CMS
+|_http-server-header: BaseHTTP/0.6 Python/3.9.6
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 6.21 seconds

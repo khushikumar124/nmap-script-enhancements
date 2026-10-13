@@ -184,15 +184,8 @@ pkill -f srv.py; sleep 1; python3 bench/srv.py > bench/srv.log 2>&1 &
 cat blog-assets/e4/step.diff
 ```
 
-### Script help (NSEDoc) and syntax check, final scripts
-33. (E1/E2) Screenshot: description, usage, `@output` and `@xmloutput` text.
-```bash
-nmap --script-help ./scripts/http-generator-e2.nse
-```
-34. (E3/E4) Screenshot: the description with the new paragraphs.
-```bash
-nmap --script-help ./scripts/unusual-port-e4.nse
-```
+### Script help (NSEDoc), all four enhanced scripts
+33. (E1/E2/E3/E4) The help text of each script. Run from inside `scripts/` in a sub-shell, so no "File ./scripts/ exists" warning appears. The four commands are listed in section D, points b1 to b4.
 
 ### After installing (section A), run by name
 35. (E1/E2) Screenshot: each HTTP script by name, 8081 and 8082 (labels `http-generator-e1:` and `http-generator-e2:`).
@@ -217,3 +210,75 @@ pkill -f srv.py
 lsof -nP -iTCP -sTCP:LISTEN | grep Python   # should print nothing
 ```
 `bench/run_all.sh` re-runs the whole test matrix on fresh servers and rewrites `evidence/` and `blog-assets/`.
+
+## D. Screenshots still to take
+
+Run each command from the repository root (`~/NSE-Project/nmap-script-enhancements`) with the fake servers running (`python3 bench/srv.py > bench/srv.log 2>&1 &`), except where the text says otherwise. Take one screenshot per command (per block for c). Each command's expected output is saved verbatim in `evidence/screenshots/`, with the file name given here, so you can compare your terminal to it (only the dates, latencies and scan times differ).
+
+**a. E2 structured output** (`a-e2-structured-output.txt`). Screenshot the `<script id="http-generator-e2" ...>` part: two `<table>` blocks, the first with `generator` Hugo 0.120 and `source` meta, the second with `generator` Drupal 10 (https://www.drupal.org) and `source` header.
+```bash
+nmap -sV -Pn -p8081 --script ./scripts/http-generator-e2.nse --script-args http-generator.path=/e2/diff -oX - 127.0.0.1
+```
+
+**b. Script help**, one screenshot each, with no "Warning: File ./scripts/ exists" line. The `cd scripts` inside the brackets is what removes the warning. Each help text matches what that script adds.
+
+b1 (`b1-help-e1.txt`): the description ends with the sentence that only the start of the page is searched (up to the end of `<head>` or the first 64 KB).
+```bash
+(cd scripts && nmap --script-help ./http-generator-e1.nse)
+```
+b2 (`b2-help-e2.txt`): E1's text plus the X-Generator header sentence and the paragraph about the "meta" or "header" source.
+```bash
+(cd scripts && nmap --script-help ./http-generator-e2.nse)
+```
+b3 (`b3-help-e3.txt`): the stock description plus the paragraph about the expected service, probed or table, the confidence, and the structured table.
+```bash
+(cd scripts && nmap --script-help ./unusual-port-e3.nse)
+```
+b4 (`b4-help-e4.txt`): E3's text plus the paragraph about services found inside TLS.
+```bash
+(cd scripts && nmap --script-help ./unusual-port-e4.nse)
+```
+
+**c. Regression: unchanged cases, stock against enhanced** (the output text is the same; only the label carries the script's own name).
+
+c1 (`c1-regression-http-generator.txt`): a normal stock-style tag. Run the three commands one after the other and screenshot them together; all three must show `TYPO3 4.2 CMS`.
+```bash
+nmap -sV -Pn -p8081 --script ./scripts/http-generator.nse --script-args http-generator.path=/e1/stock 127.0.0.1
+nmap -sV -Pn -p8081 --script ./scripts/http-generator-e1.nse --script-args http-generator.path=/e1/stock 127.0.0.1
+nmap -sV -Pn -p8081 --script ./scripts/http-generator-e2.nse --script-args http-generator.path=/e1/stock 127.0.0.1
+```
+c2 (`c2-regression-unusual-port.txt`): ssh on 22 stays silent. All three must show only the `22/tcp open ssh` line and no `unusual-port` line.
+```bash
+nmap -sV -Pn -p22 --script ./scripts/unusual-port.nse 127.0.0.1
+nmap -sV -Pn -p22 --script ./scripts/unusual-port-e3.nse 127.0.0.1
+nmap -sV -Pn -p22 --script ./scripts/unusual-port-e4.nse 127.0.0.1
+```
+
+**d. E4 negative controls** (these must still be flagged). These need other fake-server modes, so restart the servers for each one and restore the normal ones at the end.
+
+d1 (`d1-negative-ssh-over-tls-993.txt`): ssh wrapped in TLS on 993. Expected: `993/tcp open ssl/ssh` and, under `unusual-port-e4:`, `ssh unexpected on port tcp/993` with `expected imaps; detection probed, confidence 10`.
+```bash
+kill $(lsof -tiTCP:8081 -sTCP:LISTEN); sleep 1; python3 bench/srv.py ssh993 > bench/srv.log 2>&1 &
+```
+```bash
+nmap -sV -Pn -p993 --script ./scripts/unusual-port-e4.nse 127.0.0.1
+```
+d2 (`d2-negative-plaintext-smtp-993.txt`): plaintext smtp (no TLS) on 993. Expected: `993/tcp open smtp Postfix smtpd` and `smtp unexpected on port tcp/993` with `expected imaps; ...`.
+```bash
+kill $(lsof -tiTCP:8081 -sTCP:LISTEN); sleep 1; python3 bench/srv.py smtp993 > bench/srv.log 2>&1 &
+```
+```bash
+nmap -sV -Pn -p993 --script ./scripts/unusual-port-e4.nse 127.0.0.1
+```
+Then go back to the normal servers:
+```bash
+kill $(lsof -tiTCP:8081 -sTCP:LISTEN); sleep 1; python3 bench/srv.py > bench/srv.log 2>&1 &
+```
+
+**e. E4 final run** (`e-e4-final-tls-ports.txt`). Run both commands and screenshot them together (about 30 seconds each). The first (E3) flags all six ports; the second (E4) shows the six `ssl/...` services and no `unusual-port` line.
+```bash
+nmap -sV -Pn -p465,563,636,990,993,995 --script ./scripts/unusual-port-e3.nse 127.0.0.1
+nmap -sV -Pn -p465,563,636,990,993,995 --script ./scripts/unusual-port-e4.nse 127.0.0.1
+```
+
+**Which existing screenshots stay valid.** The scripts' description and comment text changed (the NSEDoc of E1, E3 and E4, section b above), but not their code or output. I re-ran the commands of Step 6 (ref1, E1, E2), Step 7 (ref2, E3) and Step 8 (E3, E4) and the saved outputs match (only times and latencies differ). The E3 `-oX` output has the same six `elem` lines. So **Step 6, Step 7, Step 8 and the E3 `-oX` screenshot stay valid**. The E2 `-oX` screenshot from Step 9 also stays valid (point a only repeats it). Only the **old Step 10 help screenshots (`--script-help` for `http-generator-e2` and `unusual-port-e4`) are affected** and must be retaken as b1 to b4.
